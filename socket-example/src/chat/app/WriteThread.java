@@ -11,26 +11,22 @@ public class WriteThread implements Runnable{
     public WriteThread(Socket socket, Client client){
         this.socket = socket;
         this.client = client;
-
         try {
             out = new PrintWriter(socket.getOutputStream(), true);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
     @Override
     public void run() {
         Console console = System.console();
-
         String userName = console.readLine("Enter your name: ");
         client.setUserName(userName);
         out.println(userName);
-
         String text;
         do {
             text = console.readLine(userName);
-        } while (!text.equals("Exit"));
+        } while (!socket.isClosed());
 
         try {
             socket.close();
