@@ -24,14 +24,13 @@ public class UserThread implements Runnable{
             String userName = in.readLine();
             server.addUserName(userName);
 
-            MyLogger.info("New user connected ");
-            server.broadcast(userName, this);
+            String serverMsg = "New user connected: " + userName;
+            server.broadcast(serverMsg, this);
 
             String clientMsg;
             do {
                 clientMsg = in.readLine();
-                MyLogger.info(String.format("'%s' '%s'", userName, clientMsg));
-                String serverMsg =  userName + " " + clientMsg;
+                serverMsg = "[" + userName + "]: " + clientMsg;
                 server.broadcast(serverMsg, this);
             } while(!clientMsg.equals("Exit"));
             server.removeUser(userName, this);
@@ -48,7 +47,7 @@ public class UserThread implements Runnable{
             MyLogger.info(String.format("Connected users: '%s' ", server.getUserNames()));
         }
         else {
-            MyLogger.info("No user connected");
+            MyLogger.info("No other user connected");
         }
     }
 
