@@ -3,7 +3,7 @@ package chat.app;
 import java.io.*;
 
 import java.net.*;
-public class ReadThread implements Runnable{
+public class ReadThread extends Thread{
     private BufferedReader in;
     private Socket socket;
     private Client client;
@@ -23,9 +23,9 @@ public class ReadThread implements Runnable{
         while (true) {
             try {
                 String response = in.readLine();
-                MyLogger.info(String.format("\n '%s'", response));
+                System.out.println("\n" + response);
                 if (client.getUserName() != null) {
-                    MyLogger.info(client.getUserName());
+                    System.out.print("[" + client.getUserName() + "]: ");
                 }
             } catch (IOException e) {
                 MyLogger.info(String.format("Error reading in this server: '%s'", e.getMessage()));

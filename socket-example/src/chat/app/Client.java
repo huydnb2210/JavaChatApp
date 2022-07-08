@@ -27,10 +27,10 @@ public class Client {
     public void execute() {
         try {
             Socket socket = new Socket(hostName, port);
-            ReadThread readThread = new ReadThread(socket, this);
-            WriteThread writeThread = new WriteThread(socket, this);
-            new Thread(readThread).start();
-            new Thread(writeThread).start();
+            MyLogger.info("Connected to the server");
+            new ReadThread(socket, this).start();
+            new WriteThread(socket, this).start();
+
 
         } catch (UnknownHostException ex) {
             MyLogger.info(String.format("Server not found: '%s'", ex.getMessage()));
@@ -43,7 +43,8 @@ public class Client {
     }
 
     public static void main(String[] args) {
-        if (args.length < 2) {return;}
+        if (args.length < 2) {System.out.println("Please enter address and port number");
+            System.exit(0);}
 
         String hostname = args[0];
         int port = Integer.parseInt(args[1]);

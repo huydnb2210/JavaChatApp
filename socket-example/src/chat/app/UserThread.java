@@ -3,7 +3,7 @@ package chat.app;
 import java.net.*;
 import java.io.*;
 
-public class UserThread implements Runnable{
+public class UserThread extends Thread{
     private Socket socket;
     private Server server;
     private PrintWriter out = null;
@@ -24,18 +24,20 @@ public class UserThread implements Runnable{
             String userName = in.readLine();
             server.addUserName(userName);
 
-            MyLogger.info("New user connected ");
-            server.broadcast(userName, this);
+            String serverMsg = "New user connected: " + userName;
+            server.broadcast(serverMsg, this);
 
             String clientMsg;
             do {
                 clientMsg = in.readLine();
-                MyLogger.info(String.format("'%s' '%s'", userName, clientMsg));
-                String serverMsg =  userName + " " + clientMsg;
+                serverMsg = "[" + userName + "]: " + clientMsg;
                 server.broadcast(serverMsg, this);
             } while(!clientMsg.equals("Exit"));
             server.removeUser(userName, this);
             socket.close();
+
+            serverMsg = userName + " exit.";
+            server.broadcast(serverMsg, this);
 
         } catch (IOException e) {
             MyLogger.info(String.format("Error in UserThread: '%s'", e.getMessage()));
@@ -48,7 +50,7 @@ public class UserThread implements Runnable{
             MyLogger.info(String.format("Connected users: '%s' ", server.getUserNames()));
         }
         else {
-            MyLogger.info("No user connected");
+            MyLogger.info("No other user connected");
         }
     }
 
