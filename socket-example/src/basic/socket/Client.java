@@ -30,6 +30,7 @@ public class Client {
                 out.writeUTF(line);
             } catch (IOException e) {
                 System.out.println(e);
+                break;
             }
         }
 
