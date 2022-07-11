@@ -35,16 +35,9 @@ public class UserThread implements Runnable{
             } while(!clientMsg.equals("Exit"));
             server.removeUser(userName, this);
             socket.close();
-<<<<<<< HEAD
-=======
 
             serverMsg = userName + " exit.";
             server.broadcast(serverMsg, this);
-
-<<<<<<< HEAD
->>>>>>> Huy
-=======
->>>>>>> Huy
         } catch (IOException e) {
             MyLogger.info(String.format("Error in UserThread: '%s'", e.getMessage()));
             e.printStackTrace();

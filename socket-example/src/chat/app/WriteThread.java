@@ -3,53 +3,52 @@ package chat.app;
 import java.io.*;
 import java.net.*;
 
-public class WriteThread implements Runnable{
-    private PrintWriter out;
-    private Socket socket;
-    private Client client;
+public class WriteThread implements Runnable {
+	private PrintWriter out;
+	private Socket socket;
+	private Client client;
 
-    public WriteThread(Socket socket, Client client){
-        this.socket = socket;
-        this.client = client;
+	public WriteThread(Socket socket, Client client) {
+		this.socket = socket;
+		this.client = client;
 
-        try {
-            out = new PrintWriter(socket.getOutputStream(), true);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+		try {
+			out = new PrintWriter(socket.getOutputStream(), true);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-    @Override
-    public void run() {
-        Console console = System.console();
+	@Override
+	public void run() {
+		Console console = System.console();
 
-        String userName = console.readLine("Enter your name: ");
-        client.setUserName(userName);
-        out.println(userName);
+		String userName = console.readLine("Enter your name: ");
+		client.setUserName(userName);
+		out.println(userName);
 
-        String text;
-        do {
-<<<<<<< HEAD
-<<<<<<< HEAD
-            text = console.readLine(userName);
-            out.println(text);
+		String text;
+		do {
+
+			text = console.readLine(userName);
+			out.println(text);
 //            out.println();
-        } while (!socket.isClosed());
-=======
-            text = console.readLine("[" + userName + "]: ");
-            out.println(text);
-        } while (!text.equals("Exit"));
->>>>>>> Huy
-=======
-            text = console.readLine("[" + userName + "]: ");
-            out.println(text);
-        } while (!text.equals("Exit"));
->>>>>>> Huy
+		} while (!socket.isClosed());
+		text = console.readLine("[" + userName + "]: ");
+		out.println(text);
 
-        try {
-            socket.close();
-        } catch (IOException e) {
-            MyLogger.info(String.format("Error waiting from server", e.getMessage()));
-        }
-    }
+		while (!text.equals("Exit"))
+			;
+
+		text = console.readLine("[" + userName + "]: ");
+		out.println(text);
+		while (!text.equals("Exit"))
+			;
+
+		try {
+			socket.close();
+		} catch (IOException e) {
+			MyLogger.info(String.format("Error waiting from server", e.getMessage()));
+		}
+	}
 }
