@@ -27,7 +27,7 @@ public class Server {
 
                 UserThread newUser = new UserThread(socket, this);
                 userThreads.add(newUser);
-                newUser.start();
+                new Thread(newUser).start();
 
             }
         } catch (IOException e) {
