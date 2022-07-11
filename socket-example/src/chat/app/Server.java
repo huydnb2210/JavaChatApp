@@ -39,7 +39,7 @@ public class Server {
     public static void main(String[] args) {
         if (args.length < 1) {
             System.out.println("Please enter port number");
-            System.exit(0);
+           return;
         }
         int port = Integer.parseInt(args[0]);
         Server server = new Server(port);

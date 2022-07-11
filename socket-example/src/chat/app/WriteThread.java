@@ -26,6 +26,7 @@ public class WriteThread implements Runnable{
         String text;
         do {
             text = console.readLine(userName);
+            out.print(text);
         } while (!socket.isClosed());
 
         try {
