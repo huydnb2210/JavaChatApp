@@ -31,6 +31,7 @@ public class ReadThread implements Runnable{
            } catch (IOException e) {
                MyLogger.info(String.format("Error reading in this server: '%s'", e.getMessage()));
                e.printStackTrace();
+               break;
            }
         }
         while (!response.equals("Exit"));
