@@ -27,10 +27,12 @@ public class Client {
     public void execute() {
         try {
             Socket socket = new Socket(hostName, port);
+            MyLogger.info("Connected to the server");
             ReadThread readThread = new ReadThread(socket, this);
-            WriteThread writeThread = new WriteThread(socket, this);
+            WriteThread writeThread = new WriteThread(socket,this);
             new Thread(readThread).start();
             new Thread(writeThread).start();
+
 
         } catch (UnknownHostException ex) {
             MyLogger.info(String.format("Server not found: '%s'", ex.getMessage()));

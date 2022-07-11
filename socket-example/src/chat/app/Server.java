@@ -46,11 +46,10 @@ public class Server {
         server.execute();
     }
 
-    void broadcast(String msg, UserThread ex) {
-        for (UserThread aUser: userThreads
-             ) {
-            if (aUser != ex) {
-                aUser.sendMsg(msg);
+    void broadcast(String message, UserThread excludeUser) {
+        for (UserThread aUser : userThreads) {
+            if (aUser != excludeUser) {
+                aUser.sendMsg(message);
             }
         }
     }

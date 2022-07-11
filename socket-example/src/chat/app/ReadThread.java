@@ -20,17 +20,19 @@ public class ReadThread implements Runnable{
 
     @Override
     public void run() {
-        while (true) {
+        String response = "";
+        do {
             try {
-                String response = in.readLine();
-                MyLogger.info(String.format("\n '%s'", response));
-                if (client.getUserName() != null) {
-                    MyLogger.info(client.getUserName());
-                }
-            } catch (IOException e) {
-                MyLogger.info(String.format("Error reading in this server: '%s'", e.getMessage()));
-                e.printStackTrace();
-            }
+                response = in.readLine();
+               System.out.println("\n" + response);
+               if (client.getUserName() != null) {
+                   System.out.print("[" + client.getUserName() + "]: ");
+               }
+           } catch (IOException e) {
+               MyLogger.info(String.format("Error reading in this server: '%s'", e.getMessage()));
+               e.printStackTrace();
+           }
         }
+        while (!response.equals("Exit"));
     }
 }
