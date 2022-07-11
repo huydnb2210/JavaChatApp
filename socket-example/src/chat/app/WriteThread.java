@@ -3,7 +3,7 @@ package chat.app;
 import java.io.*;
 import java.net.*;
 
-public class WriteThread extends Thread{
+public class WriteThread implements Runnable{
     private PrintWriter out;
     private Socket socket;
     private Client client;
