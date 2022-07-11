@@ -28,8 +28,10 @@ public class Client {
         try {
             Socket socket = new Socket(hostName, port);
             MyLogger.info("Connected to the server");
-            new ReadThread(socket, this).start();
-            new WriteThread(socket, this).start();
+            ReadThread readThread = new ReadThread(socket, this);
+            WriteThread writeThread = new WriteThread(socket,this);
+            new Thread(readThread).start();
+            new Thread(writeThread).start();
 
 
         } catch (UnknownHostException ex) {
