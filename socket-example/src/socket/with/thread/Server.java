@@ -15,8 +15,8 @@ public class Server {
                 Socket client = server.accept();
                 MyLogger.info("Server accepted");
                 MyLogger.info(String.format("New client connected: '%s'", client.getInetAddress().getHostAddress()));
-                ClientHandler clientHandler = new ClientHandler(client);
-                new Thread(clientHandler).start();
+              //  ClientHandler clientHandler = new ClientHandler(client);
+               // new Thread(clientHandler).start();
             }
 
         } catch (IOException e) {
