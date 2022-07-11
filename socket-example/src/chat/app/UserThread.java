@@ -41,6 +41,9 @@ public class UserThread implements Runnable{
             serverMsg = userName + " exit.";
             server.broadcast(serverMsg, this);
 
+<<<<<<< HEAD
+>>>>>>> Huy
+=======
 >>>>>>> Huy
         } catch (IOException e) {
             MyLogger.info(String.format("Error in UserThread: '%s'", e.getMessage()));
