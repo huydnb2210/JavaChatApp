@@ -3,7 +3,7 @@ package chat.app;
 import java.io.*;
 
 import java.net.*;
-public class ReadThread extends Thread{
+public class ReadThread implements Runnable{
     private BufferedReader in;
     private Socket socket;
     private Client client;
