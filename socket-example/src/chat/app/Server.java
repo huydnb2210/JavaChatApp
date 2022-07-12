@@ -8,7 +8,9 @@ public class Server {
     private int port;
     private Set<String> userNames = new HashSet<>();
     private Set<UserThread> userThreads = new HashSet<>();
+    
     ServerSocket server = null;
+    int Number=9;
     public Server(int port) {
         this.port = port;
     }
